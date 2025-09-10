@@ -17,20 +17,18 @@ This script automatically measures the full content height and width, so your PD
 - [Node.js](https://nodejs.org/) v16 or higher
 - [Puppeteer](https://pptr.dev/)
 
-Install Puppeteer:
-Linux
+Install Puppeteer:  
 `bash
 npm install puppeteer`
 
 ### Usage
-Basic
+Basic  
 `node mhtml-to-pdf.js "input.html" output.pdf`
 This measures the full page width and height and generates a single-page PDF.
 
 With custom dimensions
 You can override width and height.
 `node mhtml-to-pdf.js "input.mhtml" output.pdf --height 200 --width 50`
-
 
 Numbers without unit default to pixels
 You can also use px, in, mm
@@ -48,8 +46,7 @@ Examples:
 # Mixed units: height=200px, width=A4
 `node mhtml-to-pdf.js "input.mhtml" output.pdf --height 200 --width a4`
 
-Notes
-
+# Notes:  
 By default, the script calculates width and height automatically.
 Very tall pages are capped at 20000px height (~208 inches) to avoid issues with some PDF viewers. You can increase this limit in the script if needed.
 Using a4 sets both width and height to A4 size (portrait).
