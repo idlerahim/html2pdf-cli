@@ -16,6 +16,7 @@ This script automatically measures the full content height and width, so your PD
 
 - [Node.js](https://nodejs.org/) v16 or higher
 - [Puppeteer](https://pptr.dev/)
+- Chrome or Firefox [Installed]
 
 Install Puppeteer:  
 `bash
