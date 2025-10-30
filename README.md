@@ -24,28 +24,28 @@ npm install puppeteer`
 
 ### Usage
 Basic  
-`node mhtml-to-pdf.js "input.html" output.pdf`
+`node html2pdf-cli.js "input.html" output.pdf`
 This measures the full page width and height and generates a single-page PDF.
 
 With custom dimensions
 You can override width and height.
-`node mhtml-to-pdf.js "input.mhtml" output.pdf --height 200 --width 50`
+`node html2pdf-cli.js "input.mhtml" output.pdf --height 200 --width 50`
 
 Numbers without unit default to pixels
 You can also use px, in, mm
 Examples:
 
 # Force width=50px, height=200px
-`node mhtml-to-pdf.js "input.mhtml" output.pdf --height 200 --width 50`
+`node html2pdf-cli.js "input.mhtml" output.pdf --height 200 --width 50`
 
 # Width in pixels, height in inches
-`node mhtml-to-pdf.js "input.mhtml" output.pdf --height 200 --width 8.5in`
+`node html2pdf-cli.js "input.mhtml" output.pdf --height 200 --width 8.5in`
 
 # A4 paper size (portrait, 8.27in × 11.69in)
-`node mhtml-to-pdf.js "input.mhtml" output.pdf --height a4 --width a4`
+`node html2pdf-cli.js "input.mhtml" output.pdf --height a4 --width a4`
 
 # Mixed units: height=200px, width=A4
-`node mhtml-to-pdf.js "input.mhtml" output.pdf --height 200 --width a4`
+`node html2pdf-cli.js "input.mhtml" output.pdf --height 200 --width a4`
 
 # Notes:  
 By default, the script calculates width and height automatically.
@@ -54,7 +54,7 @@ Using a4 sets both width and height to A4 size (portrait).
 
 Example Output
 Running:
-`node mhtml-to-pdf.js "ChatGPT - ISM.mhtml" output.pdf`
+`node html2pdf-cli.js "ChatGPT - ISM.mhtml" output.pdf`
 
 Produces:
 
