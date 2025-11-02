@@ -53,10 +53,9 @@ Very tall pages are capped at 20000px height (~208 inches) to avoid issues with 
 Using a4 sets both width and height to A4 size (portrait).
 
 Example Output
-Running:
+
+- Produces PDF size: 1200px x 7500px (PDF written to output.pdf)
 `node html2pdf-cli.js "ChatGPT - ISM.mhtml" output.pdf`
 
-Produces:
-
-Using PDF size: 1200px x 7500px
-PDF written to output.pdf
+- To Export Jupyter Notebook HTML as one long single page, use below command:
+`node html2pdf-cli.js input.html output.pdf --height 15000 --width 1000`
