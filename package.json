@@ -1,0 +1,24 @@
+{
+  "name": "html2pdf-cli",
+  "version": "1.0.0",
+  "description": "Convert `.html` & `.mhtml` files to a **single-page PDF** using Puppeteer.  \r This script automatically measures the full content height and width, so your PDF is not broken into multiple pages.",
+  "main": "html2pdf-cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/idlerahim/html2pdf-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/idlerahim/html2pdf-cli/issues"
+  },
+  "homepage": "https://github.com/idlerahim/html2pdf-cli#readme",
+  "dependencies": {
+    "puppeteer": "^25.16.0"
+  }
+}

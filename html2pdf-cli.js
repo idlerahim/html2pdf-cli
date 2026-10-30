@@ -8,10 +8,8 @@ function parseArgs(argv) {
   if (args.length === 0) return out;
 
   out.file = args[0];
-  out.outPath = args[1] || "out.pdf";
 
-  // simple flag parsing: --height <val> --width <val>
-  for (let i = 2; i < args.length; i++) {
+  for (let i = 1; i < args.length; i++) {
     const a = args[i];
     if (a.startsWith("--")) {
       const key = a.slice(2);
@@ -22,6 +20,8 @@ function parseArgs(argv) {
       } else {
         out.raw[key.toLowerCase()] = "true";
       }
+    } else if (out.outPath === null) {
+      out.outPath = a;
     }
   }
   return out;
@@ -30,6 +30,7 @@ function parseArgs(argv) {
 function parseDimension(value, isWidth) {
   if (value == null) return null;
   const v = String(value).toLowerCase().trim();
+  if (v === "auto") return null;
 
   if (v === "a4") {
     // A4 portrait: 8.27in x 11.69in
@@ -118,7 +119,7 @@ function mmToIn(mm) {
 (async () => {
   const args = parseArgs(process.argv);
   if (!args.file) {
-    console.error("Usage: node mhtml-to-pdf.js /path/to/file.mhtml [out.pdf] [--height <val>] [--width <val>]");
+    console.error("Usage: node html2pdf-cli.js <input.html|input.mhtml> [out.pdf] [--height <auto|size>] [--width <auto|size>]");
     process.exit(1);
   }
 
@@ -132,6 +133,7 @@ function mmToIn(mm) {
   const page = await browser.newPage();
 
   const filePath = path.resolve(args.file);
+  const outputPath = args.outPath || path.join(path.dirname(filePath), `${path.parse(filePath).name}.pdf`);
   await page.goto("file://" + filePath, { waitUntil: "networkidle0" });
 
   // small delay for JS-driven layout, compatible with older puppeteer
@@ -199,7 +201,7 @@ function mmToIn(mm) {
   console.log("Using PDF size:", finalWidth, "x", finalHeight);
 
   await page.pdf({
-    path: args.outPath,
+    path: outputPath,
     width: finalWidth,
     height: finalHeight,
     printBackground: true,
@@ -207,5 +209,5 @@ function mmToIn(mm) {
   });
 
   await browser.close();
-  console.log("PDF written to", args.outPath);
+  console.log("PDF written to", outputPath);
 })();

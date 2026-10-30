@@ -1,0 +1,25 @@
+node_modules/
+
+# Generated documents
+*.pdf
+*.html
+*.mhtml
+
+# Dependencies
+node_modules/
+
+# Build and coverage output
+dist/
+build/
+coverage/
+
+# Logs and temporary files
+*.log
+npm-debug.log*
+*.tmp
+*.temp
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db

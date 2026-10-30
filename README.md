@@ -1,61 +1,46 @@
-# HTML & MHTML to PDF (No Pagination)
+# HTML & MHTML to PDF
 
-Convert `.html` & `.mhtml` files to a **single-page PDF** using Puppeteer.  
-This script automatically measures the full content height and width, so your PDF is not broken into multiple pages.
+Convert `.html` and `.mhtml` files to a single-page PDF with Puppeteer. The script measures the document dimensions automatically unless you override them.
 
-## Features
+## Setup
 
-- Converts `.html` & `.mhtml` web archive files to PDF
-- Automatically detects page width and height
-- Optionally override dimensions with command-line arguments
-- Supports units: `px`, `in`, `mm`, or `a4`
-- Prevents pagination (produces one tall PDF page)
-- Works with Node.js + Puppeteer
+Install [Node.js](https://nodejs.org/) and then install the project dependencies from the project directory:
 
-## Requirements
+```powershell
+npm init -y
+npm install puppeteer
+```
 
-- [Node.js](https://nodejs.org/) v16 or higher
-- [Puppeteer](https://pptr.dev/)
-- Chrome or Firefox [Installed]
+Puppeteer downloads a compatible Chrome browser during installation.
 
-Install Puppeteer:  
-`bash
-npm install puppeteer`
+## Usage
 
-### Usage
-Basic  
-`node html2pdf-cli.js "input.html" output.pdf`
-This measures the full page width and height and generates a single-page PDF.
+```text
+node html2pdf-cli.js <input.html|input.mhtml> [output.pdf] [--height <auto|size>] [--width <auto|size>]
+```
 
-With custom dimensions
-You can override width and height.
-`node html2pdf-cli.js "input.mhtml" output.pdf --height 200 --width 50`
+If `output.pdf` is omitted, the PDF is saved beside the input using the same base name. For example, `report.html` becomes `report.pdf`. If the destination PDF already exists, it is replaced.
 
-Numbers without unit default to pixels
-You can also use px, in, mm
-Examples:
+When dimensions are omitted, both are measured automatically:
 
-# Force width=50px, height=200px
-`node html2pdf-cli.js "input.mhtml" output.pdf --height 200 --width 50`
+```powershell
+node .\html2pdf-cli.js ".\input.html"
+```
 
-# Width in pixels, height in inches
-`node html2pdf-cli.js "input.mhtml" output.pdf --height 200 --width 8.5in`
+Use `auto` to request measurement explicitly. You can combine automatic and fixed dimensions:
 
-# A4 paper size (portrait, 8.27in × 11.69in)
-`node html2pdf-cli.js "input.mhtml" output.pdf --height a4 --width a4`
+```powershell
+node .\html2pdf-cli.js ".\input.html" --height auto --width auto
+node .\html2pdf-cli.js ".\input.html" --height auto --width a4
+node .\html2pdf-cli.js ".\input.html" --height 7050 --width a4
+```
 
-# Mixed units: height=200px, width=A4
-`node html2pdf-cli.js "input.mhtml" output.pdf --height 200 --width a4`
+Dimension values support pixels (`px`), inches (`in`), millimeters (`mm`), or `a4`. Bare numbers are pixels. A4 is portrait: 8.27 inches wide by 11.69 inches high.
 
-# Notes:  
-By default, the script calculates width and height automatically.
-Very tall pages are capped at 20000px height (~208 inches) to avoid issues with some PDF viewers. You can increase this limit in the script if needed.
-Using a4 sets both width and height to A4 size (portrait).
+To choose an output path explicitly:
 
-Example Output
+```powershell
+node .\html2pdf-cli.js ".\input.mhtml" ".\exports\input.pdf" --height 200 --width 8.5in
+```
 
-- Produces PDF size: 1200px x 7500px (PDF written to output.pdf)
-`node html2pdf-cli.js "ChatGPT - ISM.mhtml" output.pdf`
-
-- To Export Jupyter Notebook HTML as one long single page, use below command:
-`node html2pdf-cli.js input.html output.pdf --height 15000 --width 1000`
+The maximum output height is capped at 20,000 pixels to avoid issues with some PDF viewers.
